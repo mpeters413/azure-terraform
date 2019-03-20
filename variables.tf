@@ -7,7 +7,7 @@
 
 variable "resource_group" {
   description = "The name of your Azure Resource Group."
-  default     = "Terraform-on-Azure"
+  default     = "Terraform-Azure"
 }
 
 variable "prefix" {
