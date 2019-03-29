@@ -203,7 +203,7 @@ storage_profile {
     storage_mb            = 5120
     backup_retention_days = 7
     geo_redundant_backup  = "Disabled"
-
+}
    administrator_login          = "mysqladmin"
    administrator_login_password = "Everything-is-bananas-010101"
    version                      = "5.7"
