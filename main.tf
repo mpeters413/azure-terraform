@@ -196,7 +196,7 @@ resource "azurerm_virtual_machine" "site" {
      name     = "B_Gen4_2"
      capacity = 2
      tier     = "Basic"
-     family   = "Gen4"
+     family   = "Gen5"
    }
 
 storage_profile {
