@@ -1,5 +1,5 @@
-resource_group = "terraform-uber"
-hostname = "uberapp617"
+resource_group = "terraform-staples"
+hostname = "staplesapp"
 location = "centralus"
 
 # Can use the following command to see available regions
