@@ -22,7 +22,7 @@ variable "hostname" {
 
 variable "location" {
   description = "The region where the virtual network is created."
-  default     = "centralus"
+  default     = "westus2"
 }
 
 variable "virtual_network_name" {
