@@ -17,7 +17,7 @@ variable "prefix" {
 
 variable "hostname" {
   description = "Virtual machine hostname. Used for local hostname, DNS, and storage-related names."
-  default     = "uberapp"
+  default     = "Staples"
 }
 
 variable "location" {
@@ -88,4 +88,9 @@ variable "admin_password" {
 variable "source_network" {
   description = "Allow access from this network prefix. Defaults to '*'."
   default     = "*"
+}
+
+variable "mysql_hostname" {
+  description = "mysql hostname"
+  default     = "mysqlhost"
 }
