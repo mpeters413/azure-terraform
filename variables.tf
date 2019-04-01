@@ -98,10 +98,10 @@ variable "mysql_hostname" {
 
 ### AKS ###
 
-# variable "ARM_CLIENT_ID" {
+# variable "arm_client_id" {
 #  description = "The Client ID for the Service Principal to use for this Managed Kubernetes Cluster"
 # }
 
-# variable "ARM_CLIENT_SECRET" {
+# variable "arm_client_secret" {
 #  description = "The Client Secret for the Service Principal to use for this Managed Kubernetes Cluster"
 # }
