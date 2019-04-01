@@ -22,7 +22,7 @@ output "App_Server_URL" {
 ### AKS ###
 
 output "id" {
-  value = "${azurerm_kubernetes_cluster.id}"
+  value = "${azurerm_kubernetes_cluster.tf_azure_guide.id}"
 }
 
 output "kube_config" {
