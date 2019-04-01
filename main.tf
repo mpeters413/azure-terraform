@@ -234,11 +234,12 @@ resource "azurerm_virtual_machine" "site" {
 # }
 
 ##### Azure AKS Cluster #####
-resource "azurerm_kubernetes_cluster" "test" {
-  name                = "acctestaks1"
-  location            = "${azurerm_resource_group.test.location}"
-  resource_group_name = "${azurerm_resource_group.test.name}"
-  dns_prefix          = "acctestagent1"
+
+resource "azurerm_kubernetes_cluster" "mattsAKS" {
+  name                = "${var.prefix}-k8s"
+  location            = "${azurerm_resource_group.tf_azure_guide.location}"
+  resource_group_name = "${azurerm_resource_group.tf_azure_guide.name}"
+  dns_prefix          = "${var.prefix}-k8s"
 
   agent_pool_profile {
     name            = "default"
@@ -249,19 +250,11 @@ resource "azurerm_kubernetes_cluster" "test" {
   }
 
   service_principal {
-    client_id     = "00000000-0000-0000-0000-000000000000"
-    client_secret = "00000000000000000000000000000000"
+    client_id     = "${var.kubernetes_client_id}"
+    client_secret = "${var.kubernetes_client_secret}"
   }
 
   tags = {
     Environment = "Production"
   }
-}
 
-output "client_certificate" {
-  value = "${azurerm_kubernetes_cluster.test.kube_config.0.client_certificate}"
-}
-
-output "kube_config" {
-  value = "${azurerm_kubernetes_cluster.test.kube_config_raw}"
-}
