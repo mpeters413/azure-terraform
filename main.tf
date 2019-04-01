@@ -250,8 +250,8 @@ resource "azurerm_kubernetes_cluster" "mattsAKS" {
   }
 
   service_principal {
-    client_id     = "${var.kubernetes_client_id}"
-    client_secret = "${var.kubernetes_client_secret}"
+    client_id     = "${var.client_id}"
+    client_secret = "${var.client_secret}"
   }
 
   tags = {
