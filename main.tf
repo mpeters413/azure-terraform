@@ -186,49 +186,82 @@ resource "azurerm_virtual_machine" "site" {
 # https://www.terraform.io/docs/providers/azurerm/r/mysql_server.html
 
 
- resource "azurerm_mysql_server" "mysql" {
-   name                = "${var.mysql_hostname}"
-   location            = "${azurerm_resource_group.tf_azure_guide.location}"
-   resource_group_name = "${azurerm_resource_group.tf_azure_guide.name}"
-   ssl_enforcement     = "Disabled"
+# resource "azurerm_mysql_server" "mysql" {
+#   name                = "${var.mysql_hostname}"
+#   location            = "${azurerm_resource_group.tf_azure_guide.location}"
+#   resource_group_name = "${azurerm_resource_group.tf_azure_guide.name}"
+#   ssl_enforcement     = "Disabled"
 
-   sku {
-     name     = "B_Gen4_2"
-     capacity = 2
-     tier     = "Basic"
-     family   = "Gen5"
-   }
+#   sku {
+#     name     = "B_Gen4_2"
+#     capacity = 2
+#     tier     = "Basic"
+#     family   = "Gen4"
+#   }
 
-storage_profile {
-    storage_mb            = 5120
-    backup_retention_days = 7
-    geo_redundant_backup  = "Disabled"
-}
-   administrator_login          = "mysqladmin"
-   administrator_login_password = "Everything-is-bananas-010101"
-   version                      = "5.7"
-   ssl_enforcement              = "Disabled"
- }
+# storage_profile {
+#    storage_mb            = 5120
+#    backup_retention_days = 7
+#    geo_redundant_backup  = "Disabled"
+# }
+# administrator_login          = "mysqladmin"
+# administrator_login_password = "Everything-is-bananas-010101"
+# version                      = "5.7"
+# ssl_enforcement              = "Disabled"
+# }
 
 # # This is a sample database that we'll populate with the MySQL sample data
 # # set provided here: https://github.com/datacharmer/test_db. With Terraform,
 # # everything is Infrastructure as Code. No more manual steps, aging runbooks,
 # # tribal knowledge or outdated wiki instructions. Terraform is your executable
 # # documentation, and it will build infrastructure correctly every time.
- resource "azurerm_mysql_database" "employees" {
-   name                = "employees"
-   resource_group_name = "${azurerm_resource_group.tf_azure_guide.name}"
-   server_name         = "${azurerm_mysql_server.mysql.name}"
-   charset             = "utf8"
-   collation           = "utf8_unicode_ci"
- }
+ #resource "azurerm_mysql_database" "employees" {
+ # name                = "employees"
+ # resource_group_name = "${azurerm_resource_group.tf_azure_guide.name}"
+ # server_name         = "${azurerm_mysql_server.mysql.name}"
+ # charset             = "utf8"
+ # collation           = "utf8_unicode_ci"
+ #}
 
 # # This firewall rule allows database connections from anywhere and is suited
 # # for demo environments. Don't do this in production. 
- resource "azurerm_mysql_firewall_rule" "demo" {
-   name                = "tf-guide-demo"
-   resource_group_name = "${azurerm_resource_group.tf_azure_guide.name}"
-   server_name         = "${azurerm_mysql_server.mysql.name}"
-   start_ip_address    = "0.0.0.0"
-   end_ip_address      = "0.0.0.0"
- }
+# resource "azurerm_mysql_firewall_rule" "demo" {
+# name                = "tf-guide-demo"
+# resource_group_name = "${azurerm_resource_group.tf_azure_guide.name}"
+# server_name         = "${azurerm_mysql_server.mysql.name}"
+# start_ip_address    = "0.0.0.0"
+# end_ip_address      = "0.0.0.0"
+# }
+
+##### Azure AKS Cluster #####
+resource "azurerm_kubernetes_cluster" "test" {
+  name                = "acctestaks1"
+  location            = "${azurerm_resource_group.test.location}"
+  resource_group_name = "${azurerm_resource_group.test.name}"
+  dns_prefix          = "acctestagent1"
+
+  agent_pool_profile {
+    name            = "default"
+    count           = 1
+    vm_size         = "Standard_D1_v2"
+    os_type         = "Linux"
+    os_disk_size_gb = 30
+  }
+
+  service_principal {
+    client_id     = "00000000-0000-0000-0000-000000000000"
+    client_secret = "00000000000000000000000000000000"
+  }
+
+  tags = {
+    Environment = "Production"
+  }
+}
+
+output "client_certificate" {
+  value = "${azurerm_kubernetes_cluster.test.kube_config.0.client_certificate}"
+}
+
+output "kube_config" {
+  value = "${azurerm_kubernetes_cluster.test.kube_config_raw}"
+}
