@@ -23,7 +23,7 @@ output "App_Server_URL" {
 
 output "id" {
   value = "${azurerm_kubernetes_cluster.tf_azure_guide.name.id}"
-i}
+}
 
 output "kube_config" {
   value = "${azurerm_kubernetes_cluster.tf_azure_guide.name.kube_config_raw}"
