@@ -9,7 +9,7 @@ cat << EOM > /var/www/html/index.html
 <html>
   <head><title>That Was Easy!</title></head>
   <body style="background-image:linear-gradient(black);">
-  <center><a href="https://ibb.co/7W3xHp7"><img src="https://i.ibb.co/7W3xHp7/staples-usa-logo.png" alt="staples-usa-logo" border="0"></a></center>
+  <center><a href="https://imgbb.com/"><img src="https://i.ibb.co/VxDhxF7/sp36619013-sc7.jpg" alt="sp36619013-sc7" border="0"></a></center>
   <marquee><h1>That Was Easy!</h1></marquee>
   </body>
 </html>
