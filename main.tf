@@ -234,4 +234,30 @@ resource "azurerm_virtual_machine" "site" {
 # }
 
 
+##### Azure AKS Cluster #####
 
+resource "azurerm_kubernetes_cluster" "mattsAKS" {
+  name                = "${var.prefix}-k8s"
+  location            = "${azurerm_resource_group.tf_azure_guide.location}"
+  resource_group_name = "${azurerm_resource_group.tf_azure_guide.name}"
+  dns_prefix          = "${var.prefix}-k8s"
+
+  agent_pool_profile {
+    name            = "default"
+    count           = 1
+    vm_size         = "Standard_DS1_v2"
+#   vm_size         = "Standard_D2_v2"
+    os_type         = "Linux"
+    os_disk_size_gb = 30
+  }
+
+  service_principal {
+    client_id     = "${var.arm_client_id}"
+    client_secret = "${var.arm_client_secret}"
+  }
+
+  tags = {
+    Environment = "Production"
+  }
+
+}
