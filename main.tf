@@ -193,10 +193,10 @@ resource "azurerm_virtual_machine" "site" {
 #   ssl_enforcement     = "Disabled"
 
 #   sku {
-#     name     = "B_Gen4_2"
+#     name     = "B_Gen5_2"
 #     capacity = 2
 #     tier     = "Basic"
-#     family   = "Gen4"
+#     family   = "Gen5"
 #   }
 
 # storage_profile {
@@ -247,8 +247,8 @@ resource "azurerm_kubernetes_cluster" "mattsAKS" {
   agent_pool_profile {
     name            = "default"
     count           = 1
-    vm_size         = "Standard_DS1_v2"
-#   vm_size         = "Standard_D2_v2"
+#   vm_size         = "Standard_DS1_v2"
+    vm_size         = "Standard_D2_v2"
     os_type         = "Linux"
     os_disk_size_gb = 30
   }
