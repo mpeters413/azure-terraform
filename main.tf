@@ -225,13 +225,13 @@ resource "azurerm_virtual_machine" "site" {
 
 # # This firewall rule allows database connections from anywhere and is suited
 # # for demo environments. Don't do this in production. 
-# resource "azurerm_mysql_firewall_rule" "demo" {
-# name                = "tf-guide-demo"
-# resource_group_name = "${azurerm_resource_group.tf_azure_guide.name}"
-# server_name         = "${azurerm_mysql_server.mysql.name}"
-# start_ip_address    = "0.0.0.0"
-# end_ip_address      = "0.0.0.0"
-# }
+ resource "azurerm_mysql_firewall_rule" "demo" {
+ name                = "tf-guide-demo"
+ resource_group_name = "${azurerm_resource_group.tf_azure_guide.name}"
+ server_name         = "${azurerm_mysql_server.mysql.name}"
+ start_ip_address    = "0.0.0.0"
+ end_ip_address      = "0.0.0.0"
+ }
 
 
 
