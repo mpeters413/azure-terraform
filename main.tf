@@ -12,8 +12,8 @@ resource "azurerm_resource_group" "mattpeters" {
 
 # Create a virtual network within the resource group
 resource "azurerm_virtual_network" "mattpeters" {
-  name                = "example-network"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
+  name                = "mattpeters-network"
+  resource_group_name = azurerm_resource_group.mattpeters.name
+  location            = azurerm_resource_group.mattpeters.location
   address_space       = ["10.0.0.0/16"]
 }
