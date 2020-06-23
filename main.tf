@@ -5,13 +5,13 @@ provider "azurerm" {
 }
 
 # Create a resource group
-resource "azurerm_resource_group" "example" {
-  name     = "example-resources"
-  location = "West Europe"
+resource "azurerm_resource_group" "mattpeters" {
+  name     = "mattpeters-resources"
+  location = "East US"
 }
 
 # Create a virtual network within the resource group
-resource "azurerm_virtual_network" "example" {
+resource "azurerm_virtual_network" "mattpeters" {
   name                = "example-network"
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
